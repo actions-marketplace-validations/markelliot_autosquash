@@ -1,12 +1,13 @@
-markelliot/autosquash@v1
-========================
+# markelliot/autosquash@v1
+
 This action enables automatic squash commits on pull requests when the repository has 'automatic merging' enabled.
 
 To add this action use the following workflow:
+
 ```yaml
 name: autosquash
 on:
-  pull_request_target:
+  pull_request:
     types:
       - opened
       - synchronized
@@ -19,5 +20,9 @@ jobs:
   autosquash:
     runs-on: ubuntu-latest
     steps:
-    - uses: markelliot/autosquash@v1
+      - uses: actions/checkout@v3
+      - uses: markelliot/autosquash@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          pull-request-number: ${{ github.event.pull_request.number }}
 ```

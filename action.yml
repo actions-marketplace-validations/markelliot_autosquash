@@ -4,13 +4,24 @@ branding:
   icon: git-merge
   color: blue
 
+inputs:
+  github-token:
+    description: >
+      the GitHub token to use to change the PR state (typically "${{ secrets.GITHUB_TOKEN }}")
+    required: true
+  pull-request-number:
+    description: >
+      the pull request number to enable squashing on (typically "${{ github.event.pull_request.number }}")
+    required: true
+
 runs:
   using: composite
   steps:
-    - name: Check for new versions
+    - name: Enable Automatic Squash Commit
       shell: bash
+      # disabling and re-enabling ensures up-to-date subject and body of squash commit
       run: |
-        # disabling and re-enabling ensures up-to-date subject and body of squash commit
-        gh pr merge --squash --disable-auto
-        gh pr merge --squash --auto
-
+        gh pr merge --squash --disable-auto "${{ inputs.push-to-repo-token }}"
+        gh pr merge --squash --auto "${{ inputs.push-to-repo-token }}"
+      env:
+        GH_TOKEN: ${{ inputs.github-token }}
