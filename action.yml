@@ -7,11 +7,11 @@ branding:
 inputs:
   github-token:
     description: >
-      the GitHub token to use to change the PR state (typically "${{ secrets.GITHUB_TOKEN }}")
+      the GitHub token to use to change the PR state (typically "\${{ secrets.GITHUB_TOKEN }}")
     required: true
   pull-request-number:
     description: >
-      the pull request number to enable squashing on (typically "${{ github.event.pull_request.number }}")
+      the pull request number to enable squashing on (typically "\${{ github.event.pull_request.number }}")
     required: true
 
 runs:
