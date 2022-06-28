@@ -24,5 +24,7 @@ jobs:
       - uses: markelliot/autosquash@v1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          pull-request: ${{ github.event.pull_request }}
+          pull-request-number: ${{ github.event.pull_request.number }}
+          squash-commit-title: "${{ github.event.pull_request.title }} (#${{ github.event.pull_request.number }})"
+          squash-commit-message: "${{ github.event.pull_request.body }}"
 ```
