@@ -64,7 +64,7 @@ runs:
           echo "Enabling autosquash on PR"
           gh pr merge --squash --auto \
             --subject "${{ inputs.squash-commit-title }}" \
-            --body "${{ inputs.squash-commit-body }}" \
+            --body "${{ inputs.squash-commit-message }}" \
             "${{ inputs.pull-request-number }}"
         else
           echo "Disabling autosquash on PR"
