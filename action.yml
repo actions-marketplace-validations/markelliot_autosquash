@@ -41,5 +41,15 @@ runs:
 
         # disabling and re-enabling ensures up-to-date subject and body of squash commit
         gh pr merge --squash --disable-auto "${{ inputs.pull-request-number }}"
+
+        let ENABLE
+        if [[ -n "${{ inputs.required-label}}" ]]
+        then
+          ENABLE=$(pr_has_label '${{ inputs.required-label }}')
+        else
+          ENABLE=true
+        fi
+
+        echo $ENABLE
       env:
         GH_TOKEN: ${{ inputs.github-token }}
