@@ -43,13 +43,6 @@ runs:
         gh pr merge --squash --disable-auto "${{ inputs.pull-request-number }}"
 
         let ENABLE="none"
-        if [[ -n "${{ inputs.required-label }}" ]]
-        then
-          ENABLE="$(pr_has_label \"${{ inputs.required-label }}\")"
-        else
-          ENABLE="true"
-        fi
 
-        echo $ENABLE
       env:
         GH_TOKEN: ${{ inputs.github-token }}
