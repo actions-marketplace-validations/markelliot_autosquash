@@ -45,14 +45,14 @@ runs:
         let ENABLE
         if [[ -n "${{ inputs.required-label}}" ]]
         then
-          ENABLE=$(pr_has_label "${{ inputs.required-label }}")
+          ENABLE=$(pr_has_label '${{ inputs.required-label }}')
         else
           ENABLE=true
         fi
 
         if [[ -n "${{ inputs.do-not-merge-label}}" ]]
         then
-          if [[ "$(pr_has_label '${{ inputs.do-not-merge-label }}'')" -eq "true" ]]
+          if [[ "$(pr_has_label '${{ inputs.do-not-merge-label }}')" -eq "true" ]]
           then
             ENABLE=false
           fi
