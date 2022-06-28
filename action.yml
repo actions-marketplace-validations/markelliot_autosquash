@@ -1,4 +1,5 @@
-name: Enable automatic squash commits on PRs
+name: autosquash
+description: Enable automatic squash commits on PRs
 inputs: []
 
 runs:
