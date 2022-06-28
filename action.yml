@@ -42,7 +42,7 @@ runs:
         # disabling and re-enabling ensures up-to-date subject and body of squash commit
         gh pr merge --squash --disable-auto "${{ inputs.pull-request-number }}"
 
-        let ENABLE="none"
+        export ENABLE="none"
 
       env:
         GH_TOKEN: ${{ inputs.github-token }}
