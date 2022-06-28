@@ -45,7 +45,7 @@ runs:
         let ENABLE=""
         if [[ -n "${{ inputs.required-label }}" ]]
         then
-          ENABLE="$(pr_has_label "${{ inputs.required-label }}")"
+          ENABLE="$(pr_has_label \"${{ inputs.required-label }}\")"
         else
           ENABLE="true"
         fi
