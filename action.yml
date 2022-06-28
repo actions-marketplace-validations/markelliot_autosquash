@@ -43,6 +43,31 @@ runs:
         gh pr merge --squash --disable-auto "${{ inputs.pull-request-number }}"
 
         export ENABLE="none"
+        if [[ -n "${{ inputs.required-label }}" ]]
+        then
+          export ENABLE="$(pr_has_label '${{ inputs.required-label }}')"
+        else
+          export ENABLE="true"
+        fi
 
+        if [[ -n "${{ inputs.do-not-merge-label }}" ]]
+        then
+          if [[ "$(pr_has_label '${{ inputs.do-not-merge-label }}')" == "true" ]]
+          then
+            echo "Disabling autosquash due to presence of do not merge label"
+            export ENABLE=false
+          fi
+        fi
+
+        if [[ "$ENABLE" == "true" ]]
+        then
+          echo "Enabling autosquash on PR"
+          gh pr merge --squash --auto \
+            --subject "${{ inputs.squash-commit-title }}" \
+            --body "${{ inputs.squash-commit-body }}" \
+            "${{ inputs.pull-request-number }}"
+        else
+          echo "Disabling autosquash on PR"
+        fi
       env:
         GH_TOKEN: ${{ inputs.github-token }}
