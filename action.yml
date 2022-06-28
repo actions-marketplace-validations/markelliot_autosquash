@@ -1,0 +1,16 @@
+name: Enable automatic squash commits on PRs
+description: |
+  As long as 'automatic merging' is enabled on the repository, this will
+  enable an automatic squash commit with the default title and body.
+inputs: []
+
+runs:
+    using: composite
+    steps:
+        - name: Check for new versions
+          shell: bash
+          run: |
+            # disabling and re-enabling ensures up-to-date subject and body of squash commit
+            gh pr merge --squash --disable-auto
+            gh pr merge --squash --auto
+
