@@ -8,8 +8,14 @@ inputs:
   github-token:
     description: the GitHub token to use to change the PR state
     required: true
-  pull-request:
-    description: the pull request object to enable
+  pull-request-number:
+    description: the number of the target pull request
+    required: true
+  squash-commit-title:
+    description: the text to use as the squash commit title
+    required: true
+  squash-commit-message:
+    description: the text to use as the squash commit message
     required: true
 
 runs:
@@ -21,7 +27,7 @@ runs:
       run: |
         gh pr merge --squash --disable-auto "${{ inputs.pull-request-number }}"
         gh pr merge --squash --auto "${{ inputs.pull-request-number }}" \
-           --subject "${{ inputs.pull-request.title }} (#${{ inputs.pull-request.number }})" \
-           --body "${{ inputs.pull-request.body }}"
+           --subject "${{ inputs.squash-commit-title }}"" \
+           --body "${{ inputs.squash-commit-message }}"
       env:
         GH_TOKEN: ${{ inputs.github-token }}
