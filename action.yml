@@ -58,7 +58,7 @@ runs:
           fi
         fi
 
-        if [[ "$ENABLE" -eq "true" ]]
+        if [[ "$ENABLE" == "true" ]]
         then
           echo "Enabling autosquash on PR"
           gh pr merge --squash --auto \
