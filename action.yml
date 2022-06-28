@@ -41,34 +41,5 @@ runs:
 
         # disabling and re-enabling ensures up-to-date subject and body of squash commit
         gh pr merge --squash --disable-auto "${{ inputs.pull-request-number }}"
-
-        let ENABLE
-        if [[ -n "${{ inputs.required-label}}" ]]
-        then
-          ENABLE=$(pr_has_label '${{ inputs.required-label }}')
-        else
-          ENABLE=true
-        fi
-
-        if [[ -n "${{ inputs.do-not-merge-label}}" ]]
-        then
-          if [[ "$(pr_has_label '${{ inputs.do-not-merge-label }}')" -eq "true" ]]
-          then
-            ENABLE=false
-          fi
-        fi
-
-        if [[ "$ENABLE" == "true" ]]
-        then
-          echo "Enabling autosquash on PR"
-          gh pr merge --squash --auto \
-            --subject "${{ inputs.squash-commit-title }}" \
-            --body "${{ inputs.squash-commit-message }}" \
-            "${{ inputs.pull-request-number }}"
-        else
-          echo "Disabling autosquash on PR"
-        fi
-
-        true
       env:
         GH_TOKEN: ${{ inputs.github-token }}
