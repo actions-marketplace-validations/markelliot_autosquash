@@ -1,7 +1,4 @@
 name: Enable automatic squash commits on PRs
-description: |
-  As long as 'automatic merging' is enabled on the repository, this will
-  enable an automatic squash commit with the default title and body.
 inputs: []
 
 runs:
