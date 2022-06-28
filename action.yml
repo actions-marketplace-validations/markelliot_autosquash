@@ -27,7 +27,7 @@ runs:
       run: |
         gh pr merge --squash --disable-auto "${{ inputs.pull-request-number }}"
         gh pr merge --squash --auto "${{ inputs.pull-request-number }}" \
-           --subject "${{ inputs.squash-commit-title }}"" \
+           --subject "${{ inputs.squash-commit-title }}" \
            --body "${{ inputs.squash-commit-message }}"
       env:
         GH_TOKEN: ${{ inputs.github-token }}
