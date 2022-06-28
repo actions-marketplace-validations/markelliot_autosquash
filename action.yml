@@ -1,14 +1,16 @@
 name: autosquash
 description: Enable automatic squash commits on PRs
-inputs: []
+branding:
+  icon: git-merge
+  color: blue
 
 runs:
-    using: composite
-    steps:
-        - name: Check for new versions
-          shell: bash
-          run: |
-            # disabling and re-enabling ensures up-to-date subject and body of squash commit
-            gh pr merge --squash --disable-auto
-            gh pr merge --squash --auto
+  using: composite
+  steps:
+    - name: Check for new versions
+      shell: bash
+      run: |
+        # disabling and re-enabling ensures up-to-date subject and body of squash commit
+        gh pr merge --squash --disable-auto
+        gh pr merge --squash --auto
 
