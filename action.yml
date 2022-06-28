@@ -33,7 +33,7 @@ runs:
         function pr_has_label() {
           if [[ -n \
             $(gh pr view --json labels --jq \
-            'select(.labels[].name | contains("$1"))' \
+            "select(.labels[].name | contains('$1'))" \
             "${{ inputs.pull-request-number }}") \
             ]]
           then
@@ -64,10 +64,13 @@ runs:
 
         if [[ "$ENABLE" -eq "true" ]]
         then
+          echo "Enabling autosquash on PR"
           gh pr merge --squash --auto \
             --subject "${{ inputs.squash-commit-title }}" \
             --body "${{ inputs.squash-commit-message }}" \
             "${{ inputs.pull-request-number }}"
+        else
+          echo "Disabling autosquash on PR"
         fi
       env:
         GH_TOKEN: ${{ inputs.github-token }}
