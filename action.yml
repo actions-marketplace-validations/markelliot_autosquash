@@ -1,4 +1,4 @@
-name: autosquash
+name: markelliot/autosquash action
 description: Enable automatic squash commits on PRs
 branding:
   icon: git-merge
