@@ -31,7 +31,7 @@ runs:
       shell: bash
       run: |
         function pr_has_label() {
-          if [[ -n "$(gh pr view --json labels --jq "select(.labels[].name | contains('$1'))" "${{ inputs.pull-request-number }}")" ]]
+          if [[ -n "$(gh pr view --json labels --jq "select(.labels[].name | contains(\"$1\"))" "${{ inputs.pull-request-number }}")" ]]
           then
             echo "true"
           else
