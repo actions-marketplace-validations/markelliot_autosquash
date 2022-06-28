@@ -68,5 +68,7 @@ runs:
         else
           echo "Disabling autosquash on PR"
         fi
+
+        true
       env:
         GH_TOKEN: ${{ inputs.github-token }}
