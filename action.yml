@@ -6,12 +6,10 @@ branding:
 
 inputs:
   github-token:
-    description: >
-      the GitHub token to use to change the PR state (typically "\${{ secrets.GITHUB_TOKEN }}")
+    description: the GitHub token to use to change the PR state
     required: true
   pull-request-number:
-    description: >
-      the pull request number to enable squashing on (typically "\${{ github.event.pull_request.number }}")
+    description: the pull request number to enable squashing on
     required: true
 
 runs:
@@ -21,7 +19,7 @@ runs:
       shell: bash
       # disabling and re-enabling ensures up-to-date subject and body of squash commit
       run: |
-        gh pr merge --squash --disable-auto "${{ inputs.push-to-repo-token }}"
-        gh pr merge --squash --auto "${{ inputs.push-to-repo-token }}"
+        gh pr merge --squash --disable-auto "${{ inputs.pull-request-number }}"
+        gh pr merge --squash --auto "${{ inputs.pull-request-number }}"
       env:
         GH_TOKEN: ${{ inputs.github-token }}
