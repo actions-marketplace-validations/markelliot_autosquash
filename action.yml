@@ -62,12 +62,16 @@ runs:
         if [[ "$ENABLE" == "true" ]]
         then
           echo "Enabling autosquash on PR"
+          echo "Title: $SQUASH_COMMIT_TITLE"
+          echo "Message:\n$SQUASH_COMMIT_MESSAGE"
           gh pr merge --squash --auto \
-            --subject "${{ inputs.squash-commit-title }}" \
-            --body "${{ inputs.squash-commit-message }}" \
+            --subject "$SQUASH_COMMIT_TITLE" \
+            --body "$SQUASH_COMMIT_MESSAGE" \
             "${{ inputs.pull-request-number }}"
         else
           echo "Disabling autosquash on PR"
         fi
       env:
         GH_TOKEN: ${{ inputs.github-token }}
+        SQUASH_COMMIT_TITLE: ${{ inputs.squash-commit-title }}
+        SQUASH_COMMIT_MESSAGE: ${{ inputs.squash-commit-message }}
